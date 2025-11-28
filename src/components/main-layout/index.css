@@ -1,0 +1,22 @@
+.main-content-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 240px;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.main-content {
+  flex: 1;
+  transition: margin-left 0.3s ease;
+  margin-left: 240px;
+}
+
+.main-content.expanded {
+  margin-left: 70px;
+}
