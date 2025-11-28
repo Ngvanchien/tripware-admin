@@ -25,7 +25,7 @@ const Sidebar = ({ isCollapsed, onToggle }) => {
     {
       icon: <BiBuildingHouse />,
       label: "Accommodation",
-      path: "/accomodation",
+      path: "/accommodation",
     },
     { icon: <BiBed />, label: "Room", path: "/room" },
     { icon: <BiCalendarCheck />, label: "Booking", path: "/booking" },

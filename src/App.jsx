@@ -5,6 +5,7 @@ import MainLayout from "./components/main-layout";
 import DashBoard from "./pages/dashboard/dashboard";
 import Login from "./pages/login/login";
 import { useEffect } from "react";
+import Accommodation from "./pages/list-accommodation/accommodation";
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route element={<MainLayout />}>
           <Route path="/" element={<DashBoard />} />
+          <Route path="/accommodation" element={<Accommodation />} />
         </Route>
       </Routes>
     </div>

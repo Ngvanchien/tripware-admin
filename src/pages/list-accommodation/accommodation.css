@@ -1,0 +1,143 @@
+/* Layout chính */
+.accommodation-page {
+  padding: 24px;
+  min-height: calc(100vh - 70px);
+  background:  rgb(232, 248, 248);
+  margin-top: 70px;
+  transition: margin-left 0.3s ease;
+  width: auto;
+}
+
+
+/* Khi thu nhỏ sidebar */
+.accommodation-page.sidebar-collapsed {
+  margin-left: 70px;
+}
+
+/* Header */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+/* Table container */
+.table-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Custom table style */
+.table-container :global(.ant-table) {
+  font-size: 13.5px !important;
+}
+
+.table-container :global(.ant-table-thead > tr > th) {
+  background: #f8fafc !important;
+  color: #475569 !important;
+  font-weight: 600 !important;
+  font-size: 12.5px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 10px 12px !important;
+}
+
+.table-container :global(.ant-table-tbody > tr > td) {
+  padding: 10px 12px !important;
+  font-size: 13.5px !important;
+}
+
+.table-container :global(.ant-table-tbody > tr) {
+  height: 52px !important;
+}
+
+.table-container :global(.ant-table-tbody > tr:hover > td) {
+  background: #f0f9ff !important;
+}
+
+/* Tag */
+.table-container :global(.ant-tag) {
+  font-size: 11.5px !important;
+  padding: 0 8px !important;
+  height: 22px !important;
+  line-height: 20px !important;
+  border-radius: 6px;
+}
+
+/* Không có ảnh */
+.no-image {
+  width: 80px;
+  height: 50px;
+  background: #e2e8f0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Buttons trong bảng */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.action-buttons button {
+  width: 34px;
+  height: 34px;
+  padding: 0 !important;
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .accommodation-page,
+  .accommodation-page.sidebar-collapsed {
+    margin-left: 70px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .accommodation-page {
+    padding: 16px;
+  }
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .header-buttons {
+    width: 100%;
+  }
+  .header-buttons button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-header h2 {
+    font-size: 1.5rem;
+  }
+  .action-buttons {
+    flex-direction: column;
+  }
+}
