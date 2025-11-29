@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import Accommodation from "./pages/acc-list/accommodation";
 import AddAccommodation from "./pages/acc-add/add-acc";
 import UpdateAccommodation from "./pages/acc-update/acc-update";
+import Room from "./pages/room-list/room";
 
 function App() {
   const location = useLocation();
@@ -33,6 +34,7 @@ function App() {
             path="/update-accommodation/:id"
             element={<UpdateAccommodation />}
           />
+          <Route path="/room" element={<Room />} />
         </Route>
       </Routes>
     </div>
