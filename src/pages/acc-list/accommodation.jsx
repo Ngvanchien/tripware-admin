@@ -6,7 +6,6 @@ import {
   UnorderedListOutlined,
   DeleteOutlined,
 } from "@ant-design/icons";
-import axios from "axios";
 import { deleteMethod, get } from "../../utils/axios/axios";
 import "./accommodation.css";
 
@@ -21,9 +20,7 @@ const Accommodation = () => {
     setLoading(true);
     try {
       const allAcc = [];
-      const startPage = 0;
-      const endPage = 10;
-      for (let i = startPage; i <= endPage; i++) {
+      for (let i = 0; i <= 10; i++) {
         const res = await get(`accommodations?page=${i}`);
         const items = res?.data?.items || [];
         allAcc.push(...items);
@@ -75,7 +72,7 @@ const Accommodation = () => {
             src={imgs[0]}
             width={90}
             height={60}
-            style={{ objectFit: "cover", borderRadius: 6 }}
+            style={{ objectFit: "cover", borderRadius: 4 }}
             preview={false}
           />
         ) : (
@@ -87,7 +84,7 @@ const Accommodation = () => {
       title: "Tên",
       dataIndex: "name",
       key: "name",
-      width: 130,
+      width: 160,
       sorter: (a, b) => (a.name || "").localeCompare(b.name || ""),
     },
 
@@ -108,14 +105,12 @@ const Accommodation = () => {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
-      ellipsis: true,
     },
 
     {
       title: "Tiện nghi",
       dataIndex: "amenities",
       key: "amenities",
-      ellipsis: true,
     },
 
     {
@@ -161,6 +156,7 @@ const Accommodation = () => {
           <Button
             size="small"
             type="primary"
+            style={{ width: 28, padding: 0 }}
             icon={<EditOutlined />}
             onClick={() => navigate(`/update-accommodation/${record.id}`)}
             title="Chỉnh sửa"
@@ -169,6 +165,7 @@ const Accommodation = () => {
           <Button
             size="small"
             type="default"
+            style={{ width: 28, padding: 0 }}
             icon={<UnorderedListOutlined />}
             onClick={() => navigate(`/accommodation-detail/${record.id}`)}
             title="Xem chi tiết"
@@ -178,6 +175,7 @@ const Accommodation = () => {
             size="small"
             danger
             type="primary"
+            style={{ width: 28, padding: 0 }}
             icon={<DeleteOutlined />}
             onClick={() => handleDelete(record.id)}
             title="Xóa"
@@ -191,31 +189,26 @@ const Accommodation = () => {
     <div className="accommodation-page">
       <div className="page-header">
         <h2>Danh sách chỗ ở</h2>
-
-        <div className="header-buttons">
-          <Button
-            type="primary"
-            size="large"
-            style={{ background: "#2893dbff", borderColor: "#45c9d2ff" }}
-            onClick={() => navigate("/add-accommodation")}
-          >
-            + Thêm chỗ ở mới
-          </Button>
-        </div>
+        <Button
+          type="primary"
+          size="large"
+          style={{ background: "#2893dbff", borderColor: "#45c9d2ff" }}
+          onClick={() => navigate("/add-accommodation")}
+        >
+          + Thêm chỗ ở mới
+        </Button>
       </div>
 
-      <div className="table-container">
-        <Spin spinning={loading} tip="Đang tải dữ liệu...">
-          <Table
-            columns={columns}
-            dataSource={data}
-            rowKey="id"
-            pagination={{ pageSize: 10, showSizeChanger: true }}
-            scroll={{ x: 1400 }}
-            bordered
-          />
-        </Spin>
-      </div>
+      <Spin spinning={loading} tip="Đang tải dữ liệu...">
+        <Table
+          columns={columns}
+          dataSource={data}
+          rowKey="id"
+          pagination={{ pageSize: 10, showSizeChanger: true }}
+          scroll={{ x: 1200 }}
+          bordered
+        />
+      </Spin>
     </div>
   );
 };

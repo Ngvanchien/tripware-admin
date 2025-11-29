@@ -1,4 +1,3 @@
-/* Layout chính */
 .accommodation-page {
   padding: 24px;
   min-height: calc(100vh - 70px);
@@ -8,13 +7,6 @@
   width: auto;
 }
 
-
-/* Khi thu nhỏ sidebar */
-.accommodation-page.sidebar-collapsed {
-  margin-left: 70px;
-}
-
-/* Header */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -35,54 +27,6 @@
   display: flex;
   gap: 12px;
 }
-
-/* Table container */
-.table-container {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-  padding: 0;
-}
-
-/* Custom table style */
-.table-container :global(.ant-table) {
-  font-size: 13.5px !important;
-}
-
-.table-container :global(.ant-table-thead > tr > th) {
-  background: #f8fafc !important;
-  color: #475569 !important;
-  font-weight: 600 !important;
-  font-size: 12.5px !important;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 10px 12px !important;
-}
-
-.table-container :global(.ant-table-tbody > tr > td) {
-  padding: 10px 12px !important;
-  font-size: 13.5px !important;
-}
-
-.table-container :global(.ant-table-tbody > tr) {
-  height: 52px !important;
-}
-
-.table-container :global(.ant-table-tbody > tr:hover > td) {
-  background: #f0f9ff !important;
-}
-
-/* Tag */
-.table-container :global(.ant-tag) {
-  font-size: 11.5px !important;
-  padding: 0 8px !important;
-  height: 22px !important;
-  line-height: 20px !important;
-  border-radius: 6px;
-}
-
-/* Không có ảnh */
 .no-image {
   width: 80px;
   height: 50px;
@@ -95,7 +39,7 @@
   color: #64748b;
 }
 
-/* Buttons trong bảng */
+
 .action-buttons {
   display: flex;
   gap: 6px;
@@ -108,7 +52,7 @@
   border-radius: 6px;
 }
 
-/* Responsive */
+
 @media (max-width: 1200px) {
   .accommodation-page,
   .accommodation-page.sidebar-collapsed {

@@ -5,7 +5,9 @@ import MainLayout from "./components/main-layout";
 import DashBoard from "./pages/dashboard/dashboard";
 import Login from "./pages/login/login";
 import { useEffect } from "react";
-import Accommodation from "./pages/list-accommodation/accommodation";
+import Accommodation from "./pages/acc-list/accommodation";
+import AddAccommodation from "./pages/acc-add/add-acc";
+import UpdateAccommodation from "./pages/acc-update/acc-update";
 
 function App() {
   const location = useLocation();
@@ -26,6 +28,11 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<DashBoard />} />
           <Route path="/accommodation" element={<Accommodation />} />
+          <Route path="/add-accommodation" element={<AddAccommodation />} />
+          <Route
+            path="/update-accommodation/:id"
+            element={<UpdateAccommodation />}
+          />
         </Route>
       </Routes>
     </div>
