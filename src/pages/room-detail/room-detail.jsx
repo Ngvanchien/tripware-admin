@@ -82,7 +82,7 @@ export default function RoomDetail() {
             width: 500,
           }}
         >
-          <Carousel autoplay>
+          <Carousel autoplay dots={true} draggable>
             {room.imageUrls.map((url, idx) => (
               <img
                 key={idx}
