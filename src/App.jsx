@@ -9,6 +9,7 @@ import Accommodation from "./pages/acc-list/accommodation";
 import AddAccommodation from "./pages/acc-add/add-acc";
 import UpdateAccommodation from "./pages/acc-update/acc-update";
 import Room from "./pages/room-list/room";
+import AddRoom from "./pages/room-add/room-add";
 
 function App() {
   const location = useLocation();
@@ -35,6 +36,7 @@ function App() {
             element={<UpdateAccommodation />}
           />
           <Route path="/room" element={<Room />} />
+          <Route path="/add-room" element={<AddRoom />} />
         </Route>
       </Routes>
     </div>
