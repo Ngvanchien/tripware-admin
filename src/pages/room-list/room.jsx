@@ -110,7 +110,7 @@ const Room = () => {
       render: (acc) =>
         acc ? (
           <div>
-            <b>{acc.name}</b>
+            <span>{acc.name}</span>
             <div style={{ fontSize: 11, color: "#666" }}>
               ({acc.type?.toUpperCase()})
             </div>

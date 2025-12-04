@@ -39,7 +39,6 @@ export default function AccommodationDetail() {
       }}
     >
       <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
-        {/* Thông tin chi tiết */}
         <div style={{ flex: 1 }}>
           <Card
             variant="bordered"

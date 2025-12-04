@@ -1,0 +1,14 @@
+.booking-page {
+  padding: 20px;
+  min-height: calc(100vh - 70px);
+  background: rgb(232, 248, 248);
+  margin-top: 70px;
+  width: auto;
+}
+
+.booking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
