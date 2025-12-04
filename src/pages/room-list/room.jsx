@@ -171,7 +171,7 @@ const Room = () => {
             type="primary"
             style={{ width: 28, padding: 0 }}
             icon={<EditOutlined />}
-            onClick={() => navigate(`/update-accommodation/${record.id}`)}
+            onClick={() => navigate(`/update-room/${record.id}`)}
             title="Chỉnh sửa"
           />
 
@@ -180,7 +180,7 @@ const Room = () => {
             type="default"
             style={{ width: 28, padding: 0 }}
             icon={<UnorderedListOutlined />}
-            onClick={() => navigate(`/accommodation-detail/${record.id}`)}
+            onClick={() => navigate(`/room-detail/${record.id}`)}
             title="Xem chi tiết"
           />
 

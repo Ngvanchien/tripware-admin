@@ -4,9 +4,9 @@ import {
   Input,
   InputNumber,
   Button,
-  Select,
   Row,
   Col,
+  Select,
   message,
   Card,
 } from "antd";
@@ -16,65 +16,68 @@ import { putJSON } from "../../utils/axios/axios";
 
 const { Option } = Select;
 
-const UpdateAccommodation = () => {
+const UpdateRoom = () => {
   const { id } = useParams();
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRoom = async () => {
       try {
         const res = await axios.get(
-          `${import.meta.env.VITE_APP_URL_PUBLIC}/accommodations/${id}`
+          `${import.meta.env.VITE_APP_URL_PUBLIC}/rooms/${id}`
         );
         setData(res.data?.data);
       } catch (err) {
         console.error(err);
-        message.error("Không lấy được dữ liệu chỗ ở!");
+        message.error("Không lấy được dữ liệu phòng!");
       }
     };
-    fetchData();
+    fetchRoom();
   }, [id]);
 
   useEffect(() => {
-    if (data)
+    if (data) {
       form.setFieldsValue({
         ...data,
-        locationId: data.location?.id,
+        accommodationId: data.accommodation?.id,
       });
+    }
   }, [data]);
 
   const onFinish = async (values) => {
     setLoading(true);
     try {
       const payload = {
-        name: values.name,
-        type: values.type,
-        locationId: values.locationId,
-        address: values.address,
-        starRating: values.starRating,
-        description: values.description,
-        amenities: values.amenities,
-        basePrice: values.basePrice,
+        accommodationId: values.accommodationId,
+        roomName: values.roomName,
+        roomType: values.roomType,
+        capacity: values.capacity,
+        pricePerNight: values.pricePerNight,
+        sizeM2: values.sizeM2,
         status: values.status,
+        description: values.description,
       };
 
       console.log("SEND CLEAN PAYLOAD:", payload);
 
-      await putJSON(`accommodations/${id}`, payload);
-      message.success("Cập nhật chỗ ở thành công!");
-      navigate("/accommodation");
+      await putJSON(`rooms/${id}`, payload);
+
+      message.success("Cập nhật phòng thành công!");
+      navigate("/room");
     } catch (err) {
       console.error(err);
-      message.error("Cập nhật thất bại!");
+      message.error("Cập nhật phòng thất bại!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div style={{ width: "80%", marginTop: "80px", marginLeft: "100px" }}>
       <Card
-        title="Cập nhật Accommodation"
+        title="Cập nhật Room"
         variant="default"
         styles={{
           header: {
@@ -94,21 +97,21 @@ const UpdateAccommodation = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="name"
-                label="Tên Accommodation"
+                name="accommodationId"
+                label="Accommodation ID"
                 rules={[{ required: true }]}
               >
-                <Input placeholder="Sunrise Hotel" />
+                <InputNumber min={1} style={{ width: "100%" }} />
               </Form.Item>
             </Col>
 
             <Col span={12}>
-              <Form.Item name="type" label="Loại" rules={[{ required: true }]}>
-                <Select placeholder="hotel, homestay, resort...">
-                  <Option value="hotel">Hotel</Option>
-                  <Option value="resort">Resort</Option>
-                  <Option value="homestay">Homestay</Option>
-                </Select>
+              <Form.Item
+                name="roomName"
+                label="Tên phòng"
+                rules={[{ required: true }]}
+              >
+                <Input placeholder="VD: Deluxe Ocean View" />
               </Form.Item>
             </Col>
           </Row>
@@ -116,40 +119,46 @@ const UpdateAccommodation = () => {
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
-                name="locationId"
-                label="Location ID"
+                name="roomType"
+                label="Loại phòng"
                 rules={[{ required: true }]}
               >
-                <InputNumber style={{ width: "100%" }} />
+                <Input placeholder="Deluxe, Standard, Family..." />
               </Form.Item>
             </Col>
 
             <Col span={12}>
               <Form.Item
-                name="starRating"
-                label="Số sao"
+                name="capacity"
+                label="Sức chứa"
                 rules={[{ required: true }]}
               >
-                <InputNumber min={1} max={5} style={{ width: "100%" }} />
+                <InputNumber min={1} style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>
 
-          <Form.Item
-            name="address"
-            label="Địa chỉ"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="123 Beach Street, Miami" />
-          </Form.Item>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="pricePerNight"
+                label="Giá mỗi đêm"
+                rules={[{ required: true }]}
+              >
+                <InputNumber min={0} style={{ width: "100%" }} />
+              </Form.Item>
+            </Col>
 
-          <Form.Item name="amenities" label="Tiện ích">
-            <Input placeholder="Pool, Gym, Spa..." />
-          </Form.Item>
-
-          <Form.Item name="basePrice" label="Giá cơ bản (USD)">
-            <InputNumber style={{ width: "100%" }} step={0.5} />
-          </Form.Item>
+            <Col span={12}>
+              <Form.Item
+                name="sizeM2"
+                label="Diện tích (m2)"
+                rules={[{ required: true }]}
+              >
+                <InputNumber min={1} step={0.5} style={{ width: "100%" }} />
+              </Form.Item>
+            </Col>
+          </Row>
 
           <Form.Item
             name="status"
@@ -163,7 +172,11 @@ const UpdateAccommodation = () => {
             </Select>
           </Form.Item>
 
-          <Form.Item name="description" label="Mô tả">
+          <Form.Item
+            name="description"
+            label="Mô tả"
+            rules={[{ required: true }]}
+          >
             <Input.TextArea rows={3} />
           </Form.Item>
 
@@ -178,4 +191,4 @@ const UpdateAccommodation = () => {
   );
 };
 
-export default UpdateAccommodation;
+export default UpdateRoom;
