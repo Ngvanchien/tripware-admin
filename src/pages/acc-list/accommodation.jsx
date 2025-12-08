@@ -28,7 +28,7 @@ const Accommodation = () => {
       setData(allAcc);
     } catch (err) {
       console.error(err);
-      message.error("Không lấy được danh sách chỗ ở!");
+      message.error("Không lấy được danh sách accommodation!");
     } finally {
       setLoading(false);
     }
@@ -41,7 +41,7 @@ const Accommodation = () => {
   const handleDelete = (id) => {
     confirm({
       title: "Xác nhận xóa",
-      content: "Bạn có chắc muốn xóa chỗ ở này không?",
+      content: "Bạn có chắc muốn xóa accommodation này không?",
       okText: "Xóa",
       okType: "danger",
       cancelText: "Hủy",
@@ -188,7 +188,7 @@ const Accommodation = () => {
   return (
     <div className="accommodation-page">
       <div className="page-header">
-        <h2>Danh sách chỗ ở</h2>
+        <h2>Danh sách accommodation</h2>
         <Button
           type="primary"
           size="large"

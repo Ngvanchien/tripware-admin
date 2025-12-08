@@ -31,7 +31,7 @@ export default function RoomDetail() {
   if (!room) return <p>Không tìm thấy phòng.</p>;
 
   return (
-    <div style={{ maxWidth: 1200, marginTop: 60, padding: 30 }}>
+    <div style={{ maxWidth: 1400, marginTop: 60, padding: 30, height: 700 }}>
       <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>
         <div style={{ flex: 1 }}>
           <Card

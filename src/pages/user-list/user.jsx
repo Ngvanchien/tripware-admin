@@ -185,7 +185,7 @@ export default function ListUser() {
           dataSource={data}
           rowKey="id"
           pagination={{ pageSize: 10, showSizeChanger: true }}
-          scroll={{ x: 1100 }}
+          scroll={{ x: 1200 }}
           bordered
         />
       </Spin>

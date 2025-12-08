@@ -32,10 +32,10 @@ export default function AccommodationDetail() {
   return (
     <div
       style={{
-        maxWidth: 1150,
+        maxWidth: 1400,
         margin: "80px auto",
         padding: 20,
-        height: 550,
+        height: 650,
       }}
     >
       <div style={{ display: "flex", gap: 20, alignItems: "flex-start" }}>

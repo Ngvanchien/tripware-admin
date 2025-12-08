@@ -15,6 +15,7 @@ import RoomDetail from "./pages/room-detail/room-detail";
 import AccommodationDetail from "./pages/acc-detail/acc-detail";
 import Booking from "./pages/booking-list/booking";
 import ListUser from "./pages/user-list/user";
+import AddUser from "./pages/user-add/user-add";
 
 function App() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function App() {
           />
           <Route path="/booking" element={<Booking />} />
           <Route path="/users" element={<ListUser />} />
+          <Route path="/add-user" element={<AddUser />} />
         </Route>
       </Routes>
     </div>
