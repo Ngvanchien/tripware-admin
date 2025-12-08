@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Table, Tag, Spin, Button, Modal, message } from "antd";
+import { Table, Tag, Spin, Button, Modal, message, Dropdown } from "antd";
 import { useNavigate } from "react-router-dom";
-import { get, deleteMethod } from "../../utils/axios/axios";
+import { get, deleteMethod, patch } from "../../utils/axios/axios";
 import {
   UnorderedListOutlined,
   DeleteOutlined,
@@ -63,6 +63,21 @@ export default function ListUser() {
     });
   };
 
+  const changeStatus = async (id, newStatus) => {
+    try {
+      await patch(`users/status/${id}?status=${newStatus}`);
+
+      setData((prev) =>
+        prev.map((u) => (u.id === id ? { ...u, status: newStatus } : u))
+      );
+
+      message.success(`Đã đổi trạng thái thành ${newStatus.toUpperCase()}`);
+    } catch (err) {
+      console.error(err);
+      message.error("Đổi trạng thái thất bại!");
+    }
+  };
+
   const columns = [
     { title: "ID", dataIndex: "id", key: "id", width: 40 },
 
@@ -71,7 +86,7 @@ export default function ListUser() {
       dataIndex: "name",
       key: "name",
       width: 120,
-      render: (name) => <span>{name || "—"}</span>,
+      render: (name) => name || "—",
     },
 
     {
@@ -110,9 +125,10 @@ export default function ListUser() {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      width: 100,
-      render: (s) => {
-        const safeStatus = s || "unknown";
+      width: 140,
+      render: (status, record) => {
+        const safeStatus = status || "unknown";
+
         const color =
           safeStatus === "active"
             ? "green"
@@ -122,7 +138,35 @@ export default function ListUser() {
             ? "orange"
             : "default";
 
-        return <Tag color={color}>{safeStatus.toUpperCase()}</Tag>;
+        const items = [
+          { key: "active", label: "ACTIVE" },
+          { key: "suspended", label: "SUSPENDED" },
+          { key: "banned", label: "BANNED" },
+        ];
+
+        return (
+          <Dropdown
+            menu={{
+              items,
+              onClick: (e) => changeStatus(record.id, e.key),
+            }}
+            trigger={["click"]}
+          >
+            <Tag
+              color={color}
+              style={{
+                cursor: "pointer",
+                fontSize: 12,
+                padding: "4px 10px",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              {safeStatus.toUpperCase()}{" "}
+              <span style={{ marginLeft: 4 }}>▾</span>
+            </Tag>
+          </Dropdown>
+        );
       },
     },
 

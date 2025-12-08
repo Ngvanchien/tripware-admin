@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Table, Tag, Spin, Button, Modal, message } from "antd";
+import { Table, Tag, Spin, Button, Modal, message, Dropdown } from "antd";
 import { useNavigate } from "react-router-dom";
-import { get, deleteMethod } from "../../utils/axios/axios";
+import { get, deleteMethod, patch } from "../../utils/axios/axios";
 import {
   UnorderedListOutlined,
   DeleteOutlined,
@@ -39,6 +39,21 @@ export default function Booking() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const changeStatus = async (id, newStatus) => {
+    try {
+      await patch(`bookings/status/${id}?status=${newStatus}`);
+
+      setData((prev) =>
+        prev.map((b) => (b.id === id ? { ...b, status: newStatus } : b))
+      );
+
+      message.success(`Đã đổi trạng thái thành ${newStatus.toUpperCase()}`);
+    } catch (err) {
+      console.error(err);
+      message.error("Đổi trạng thái thất bại!");
+    }
+  };
 
   const handleDelete = (id) => {
     confirm({
@@ -119,18 +134,54 @@ export default function Booking() {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
-      width: 110,
-      filters: [
-        { text: "Pending", value: "pending" },
-        { text: "Confirmed", value: "confirmed" },
-        { text: "Cancelled", value: "cancelled" },
-      ],
-      onFilter: (v, r) => r.status === v,
-      render: (s) => {
-        const color =
-          s === "pending" ? "orange" : s === "confirmed" ? "green" : "red";
+      width: 140,
+      render: (status, record) => {
+        const safeStatus = status || "unknown";
 
-        return <Tag color={color}>{s.toUpperCase()}</Tag>;
+        const color =
+          safeStatus === "pending"
+            ? "orange"
+            : safeStatus === "confirmed"
+            ? "blue"
+            : safeStatus === "checked_in"
+            ? "purple"
+            : safeStatus === "completed"
+            ? "green"
+            : safeStatus === "cancelled"
+            ? "red"
+            : "default";
+
+        const items = [
+          { key: "pending", label: "PENDING" },
+          { key: "confirmed", label: "CONFIRMED" },
+          { key: "checked_in", label: "CHECKED IN" },
+          { key: "completed", label: "COMPLETED" },
+          { key: "cancelled", label: "CANCELLED" },
+        ];
+
+        return (
+          <Dropdown
+            menu={{
+              items,
+              onClick: (e) => changeStatus(record.id, e.key),
+            }}
+            trigger={["click"]}
+          >
+            <Tag
+              color={color}
+              style={{
+                cursor: "pointer",
+                fontSize: 12,
+                padding: "4px 10px",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              {safeStatus.toUpperCase()}{" "}
+              <span style={{ marginLeft: 4 }}>▾</span>
+            </Tag>
+          </Dropdown>
+        );
       },
     },
 
